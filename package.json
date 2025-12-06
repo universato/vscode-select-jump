@@ -1,0 +1,48 @@
+{
+  "name": "context-search-tools",
+  "displayName": "Context Search Tools",
+  "description": "選択したテキストから検索等を行う右クリックメニュー拡張",
+  "version": "0.0.1",
+  "publisher": "universato",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "activationEvents": [
+    "onCommand:ext.searchGoogle",
+    "onCommand:ext.searchImages",
+    "onCommand:ext.searchGithubIssue"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "ext.searchGoogle",
+        "title": "検索: Google 検索する"
+      },
+      {
+        "command": "ext.searchImages",
+        "title": "検索: Google画像検索する"
+      },
+      {
+        "command": "ext.searchGithubIssue",
+        "title": "検索: GitHub Issue を開く (数字選択時)"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "ext.searchGoogle",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "ext.searchImages",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "ext.searchGithubIssue",
+          "when": "editorHasSelection"
+        }
+      ]
+    }
+  },
+  "main": "./extension.js"
+}
