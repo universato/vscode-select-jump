@@ -81,17 +81,17 @@ VS Code の設定で検索ルールをカスタマイズできます。
 ```json
 "selectJump.searchRules": [
     {
-        "label": "Google search",
+        "label": "Google検索",
         "pattern": "^(?!\\d+$).*",
         "url": "https://www.google.com/search?q=${text}"
     },
     {
-        "label": "Google image search",
+        "label": "Google画像検索",
         "pattern": "^(?!\\d+$).*",
         "url": "https://www.google.com/search?q=${text}&udm=2"
     },
     {
-        "label": "Wikipedia article",
+        "label": "Wikipedia記事",
         "pattern": "^(?!\\d+$).*",
         "url": "https://ja.wikipedia.org/wiki/${text}"
     }
