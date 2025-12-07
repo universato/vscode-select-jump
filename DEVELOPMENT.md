@@ -16,7 +16,7 @@ npx vsce package
 
 ```json
   "activationEvents": [
-    "onCommand:ext.showSearchMenu"
+    "onCommand:ext.showSelectJumpMenu"
   ],
 ```
 

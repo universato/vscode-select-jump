@@ -2,7 +2,7 @@
   "name": "select-jump",
   "displayName": "Select Jump",
   "description": "Adds a context menu for running custom searches and actions on selected text.",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "icon": "select-jump-icon.png",
   "publisher": "universato",
   "repository": {
@@ -12,7 +12,7 @@
   "engines": { "vscode": "^1.75.0" },
 
   "activationEvents": [
-    "onCommand:ext.showSearchMenu"
+    "onCommand:ext.showSelectJumpMenu"
   ],
 
   "contributes": {
@@ -54,7 +54,7 @@
 
     "commands": [
       {
-        "command": "ext.showSearchMenu",
+        "command": "ext.showSelectJumpMenu",
         "title": "Select Jump"
       }
     ],
@@ -62,7 +62,7 @@
     "menus": {
       "editor/context": [
         {
-          "command": "ext.showSearchMenu",
+          "command": "ext.showSelectJumpMenu",
           "when": "editorHasSelection",
           "group": "navigation"
         }

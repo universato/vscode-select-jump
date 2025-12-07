@@ -18,7 +18,7 @@ function activate(context) {
    * メインコマンド： Select Jump
    */
   context.subscriptions.push(
-    vscode.commands.registerCommand("ext.showSearchMenu", async () => {
+    vscode.commands.registerCommand("ext.showSelectJumpMenu", async () => {
 
       const text = getSelectedText();
       if (!text) return;
