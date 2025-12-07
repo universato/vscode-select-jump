@@ -2,12 +2,12 @@ const vscode = require('vscode');
 
 function activate(context) {
 
-  /** Open external URL */
+  // Open external URL
   const openUrl = url => {
     vscode.env.openExternal(vscode.Uri.parse(url));
   };
 
-  /** get selected text */
+  // get selected text
   const getSelectedText = () => {
     const editor = vscode.window.activeTextEditor;
     if (!editor) return "";
@@ -15,7 +15,7 @@ function activate(context) {
   };
 
   /**
-   * メインコマンド： Search selected text..."
+   * メインコマンド： Search selected text...
    */
   context.subscriptions.push(
     vscode.commands.registerCommand("ext.showSearchMenu", async () => {
@@ -25,19 +25,14 @@ function activate(context) {
 
       const config = vscode.workspace.getConfiguration("contextSearchTools");
 
-      /** 常に表示される検索メニュー */
-      const customSearches = config.get("customSearches") || [];
+      // すべての検索ルール(正規表現 + URL)
+      const searchRules = config.get("searchRules") || [];
 
-      /** 正規表現マッチした時だけ表示される検索メニュー */
-      const patternSearches = config.get("patternSearches") || [];
-
-      /** QuickPick に表示する項目配列 */
+      // QuickPick に表示する項目リスト
       const items = [];
 
-      // ----------------------------------------------------------
-      // 1. patternSearches: 正規表現に一致するものだけ追加
-      // ----------------------------------------------------------
-      patternSearches.forEach(entry => {
+      // searchRules: pattern に一致するものだけ追加
+      searchRules.forEach(entry => {
         try {
           const regex = new RegExp(entry.pattern);
 
@@ -45,38 +40,25 @@ function activate(context) {
             items.push({
               label: entry.label,
               run: () => {
-                const url = entry.url.replace("${query}", encodeURIComponent(query));
+                const encoded = encodeURIComponent(query);
+                const url = entry.url.replace("${query}", encoded);
                 openUrl(url);
               }
             });
           }
+
         } catch (error) {
-          // 正規表現エラーは無視 (表示しない)
+          // 正規表現エラーは無視(表示させない)
         }
       });
 
-      // ----------------------------------------------------------
-      // 2. customSearches: 常に追加
-      // ----------------------------------------------------------
-      customSearches.forEach(entry => {
-        items.push({
-          label: entry.label,
-          run: () => {
-            const url = entry.url.replace("${query}", encodeURIComponent(query));
-            openUrl(url);
-          }
-        });
-      });
-
-      // ----------------------------------------------------------
       // QuickPick 表示
-      // ----------------------------------------------------------
       const pick = await vscode.window.showQuickPick(
         items.map(i => i.label),
-        { placeHolder: "検索メニューを選択してください" }
+        { placeHolder: `select! (${query})` }
       );
 
-      // 選択されたものを実行
+      // 選択された項目の実行
       const chosen = items.find(i => i.label === pick);
       chosen?.run();
     })

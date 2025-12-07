@@ -1,50 +1,45 @@
 {
   "name": "context-search-tools",
   "displayName": "Context Search Tools",
-  "description": "選択したテキストから検索等を行う右クリックメニュー拡張",
+  "description": "Adds a context menu for running custom searches and actions on selected text.",
   "version": "0.0.1",
   "publisher": "universato",
   "engines": { "vscode": "^1.75.0" },
 
+  "activationEvents": [
+    "onCommand:ext.showSearchMenu"
+  ],
+
   "contributes": {
     "configuration": {
-      "title": "Search selected text...",
+      "title": "Search selected text",
       "properties": {
-        "contextSearchTools.customSearches": {
+
+        "contextSearchTools.searchRules": {
           "type": "array",
           "default": [
             {
-              "label": "Google検索",
+              "label": "Google search",
+              "pattern": "^(?!\\d+$).*",
               "url": "https://www.google.com/search?q=${query}"
             },
             {
-              "label": "Google画像検索",
+              "label": "Google image search",
+              "pattern": "^(?!\\d+$).*",
               "url": "https://www.google.com/search?q=${query}&udm=2"
             },
             {
-              "label": "Wikipedia(日本語)検索",
-              "url": "https://ja.wikipedia.org/wiki/${query}"
-            }
-          ],
-          "description": "常に QuickPick に表示される検索メニュー(${query} が選択文字列に置換されます)",
-          "items": {
-            "type": "object",
-            "properties": {
-              "label": { "type": "string" },
-              "url": { "type": "string" }
-            }
-          }
-        },
-        "contextSearchTools.patternSearches": {
-          "type": "array",
-          "default": [
+              "label": "Wikipedia article",
+              "pattern": "^(?!\\d+$).*",
+              "url": "https://en.wikipedia.org/wiki/${query}"
+            },
             {
-              "label": "時事通信社 記事検索(数字のみ)",
-              "pattern": "^\\d+$",
-              "url": "https://www.jiji.com/jc/article?k=${query}"
+              "label": "YouTube search",
+              "pattern": "^(?!\\d+$).*",
+              "url": "https://www.youtube.com/results?search_query=${query}"
             }
           ],
-          "description": "選択テキストが正規表現に一致したときだけ表示される検索メニュー",
+          "description": "選択テキストに対して正規表現パターンで表示/非表示を制御する検索メニュー一覧(${query} が選択文字列に置換されます)",
           "items": {
             "type": "object",
             "properties": {
@@ -60,7 +55,7 @@
     "commands": [
       {
         "command": "ext.showSearchMenu",
-        "title": "Search++"
+        "title": "Search selected text..."
       }
     ],
 
