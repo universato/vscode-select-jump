@@ -1,4 +1,4 @@
-# Context Search Tools
+# Select Jump (vscode-select-jump)
 
 ## English
 
@@ -46,11 +46,6 @@ Example default configuration:
         "pattern": "^(?!\\d+$).*",
         "url": "https://en.wikipedia.org/wiki/${query}"
     },
-    {
-        "label": "YouTube search",
-        "pattern": "^(?!\\d+$).*",
-        "url": "https://www.youtube.com/results?search_query=${query}"
-    }
 ]
 ```
 
@@ -100,11 +95,6 @@ VS Code の設定で検索ルールをカスタマイズできます。
         "pattern": "^(?!\\d+$).*",
         "url": "https://en.wikipedia.org/wiki/${query}"
     },
-    {
-        "label": "YouTube search",
-        "pattern": "^(?!\\d+$).*",
-        "url": "https://www.youtube.com/results?search_query=${query}"
-    }
 ]
 ```
 
@@ -115,6 +105,12 @@ npx vsce package
 ```
 
 .vsix拡張子のパッケージ化させる。
+
+```
+>Extensions: Install from VSIX...
+```
+
+.vsixをインストールする。
 
 # package.json
 
