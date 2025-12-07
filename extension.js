@@ -23,7 +23,7 @@ function activate(context) {
       const text = getSelectedText();
       if (!text) return;
 
-      const config = vscode.workspace.getConfiguration("contextSearchTools");
+      const config = vscode.workspace.getConfiguration("selectJump");
 
       // すべての検索ルール(正規表現 + URL)
       const searchRules = config.get("searchRules") || [];
