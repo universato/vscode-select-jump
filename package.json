@@ -2,8 +2,12 @@
   "name": "select-jump",
   "displayName": "Select Jump",
   "description": "Adds a context menu for running custom searches and actions on selected text.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "universato",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/universato/vscode-select-jump"
+  },
   "engines": { "vscode": "^1.75.0" },
 
   "activationEvents": [
