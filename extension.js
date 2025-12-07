@@ -35,14 +35,25 @@ function activate(context) {
       searchRules.forEach(entry => {
         try {
           const regex = new RegExp(entry.pattern);
+          const match = text.match(regex);
 
-          if (regex.test(text)) {
+          if (match) {
+            console.log(regex.test(text))
             items.push({
               label: entry.label,
               run: () => {
-                const encoded = encodeURIComponent(text);
-                const url = entry.url.replace("${text}", encoded);
-                openUrl(url);
+                let url = entry.url;
+
+                // ${text} -> text (= macth[0])
+                url = url.replace("${text}", encodeURIComponent(text));
+
+                // ${k} -> macth[k]
+                match.forEach((value, index) => {
+                  const encoded = encodeURIComponent(value);
+                  url = url.replaceAll(`\${${index}}`, encoded);
+                });
+
+                openUrl(url)
               }
             });
           }

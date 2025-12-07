@@ -2,7 +2,7 @@
   "name": "select-jump",
   "displayName": "Select Jump",
   "description": "Adds a context menu for running custom searches and actions on selected text.",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "icon": "select-jump-icon.png",
   "publisher": "universato",
   "repository": {
@@ -26,20 +26,20 @@
             {
               "label": "Google search",
               "pattern": "^(?!\\d+$).*",
-              "url": "https://www.google.com/search?q=${text}"
+              "url": "https://www.google.com/search?q=${0}"
             },
             {
               "label": "Google image search",
               "pattern": "^(?!\\d+$).*",
-              "url": "https://www.google.com/search?q=${text}&udm=2"
+              "url": "https://www.google.com/search?q=${0}&udm=2"
             },
             {
               "label": "Wikipedia article",
               "pattern": "^(?!\\d+$).*",
-              "url": "https://en.wikipedia.org/wiki/${text}"
+              "url": "https://en.wikipedia.org/wiki/${0}"
             }
           ],
-          "description": "選択テキストに対して正規表現パターンで表示/非表示を制御する検索メニュー一覧(${text} が選択文字列に置換されます)",
+          "description": "選択テキストに対して正規表現パターンで表示/非表示を制御する検索メニュー一覧(${0} が選択文字列に置換されます)",
           "items": {
             "type": "object",
             "properties": {
