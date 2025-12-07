@@ -23,15 +23,12 @@ function activate(context) {
       const text = getSelectedText();
       if (!text) return;
 
+      // すべての検索ルール(正規表現 + URL) を取得。
       const config = vscode.workspace.getConfiguration("selectJump");
-
-      // すべての検索ルール(正規表現 + URL)
       const searchRules = config.get("searchRules") || [];
 
-      // QuickPick に表示する項目リスト
+      // searchRulesのpatternに一致するものだけ、QuickPickに表示する項目リストに追加。
       const items = [];
-
-      // searchRules: pattern に一致するものだけ追加
       searchRules.forEach(entry => {
         try {
           const regex = new RegExp(entry.pattern);
