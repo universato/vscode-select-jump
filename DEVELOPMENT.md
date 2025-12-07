@@ -12,6 +12,33 @@ npx vsce package
 
 .vsixをインストールする。
 
+## npx
+
+npx: npm exc (npm execute)の略。
+npm でインストールしたパッケージを 実行(execute) する機能。
+
+## vsce: “Visual Studio Code Extensions”
+
+VSCode拡張機能。
+
+npm vsce package で、 VSCode拡張を.vsixファイルにパッケージするコマンド。
+
+## .vsix
+
+.vsixは、“Visual Studio Extension” の略だとか(?)
+もともとは、VSIX = Visual Studio Installer XML だとか。
+Visual Studioで使われており、VSCodeでも使われるようになった。
+でも、VSCodeの.vsixの中身はXMLではなく、JSONマニフェスト(package.json)が中心。
+
+# Visual Studio Marketplace
+
+[Visual Studio Marketplace](https://marketplace.visualstudio.com/)
+
+1. Publish extensions をクリック。
+2. ⋯ をクリック。
+3. update をクリック。
+4. .vsixファイルをアップロードする。
+
 # package.json
 
 ```json
