@@ -6,18 +6,18 @@
 A VS Code extension that adds a context menu for running custom searches and actions on selected text.
 
 ### Features
-* **Search selected text**: Select any text in the editor, right-click, and choose from a list of configurable search engines or actions. The available options are filtered based on regular expression patterns defined in the settings.
+* **Select Jump**: Select any text in the editor, right-click, and choose from a list of configurable search engines or actions. The available options are filtered based on regular expression patterns defined in the settings.
 
 ### Installation
 1. Open VS Code.
 2. Go to Extensions view (`Ctrl+Shift+X` or `Cmd+Shift+X`).
-3. Search for "Context Search Tools".
+3. Search for "Select Jump".
 4. Click "Install".
 
 ### Usage
 1. Select text in your editor.
 2. Right-click on the selected text to open the context menu.
-3. Choose "Search selected text..."
+3. Choose "Select Jump"
 4. A Quick Pick menu will appear with search options relevant to your selected text (based on your configured `contextSearchTools.searchRules`).
 5. Select a search option to open the result in your default browser.
 
@@ -45,7 +45,7 @@ Example default configuration:
         "label": "Wikipedia article",
         "pattern": "^(?!\\d+$).*",
         "url": "https://en.wikipedia.org/wiki/${text}"
-    },
+    }
 ]
 ```
 
@@ -60,13 +60,13 @@ Example default configuration:
 ### インストール
 1. VS Code を開きます。
 2. 拡張機能ビュー (`Ctrl+Shift+X` または `Cmd+Shift+X`) を開きます。
-3. "Context Search Tools" を検索します。
+3. "Select Jump" を検索します。
 4. 「インストール」をクリックします。
 
 ### 使用方法
 1. エディターでテキストを選択します。
 2. 選択したテキストを右クリックしてコンテキストメニューを開きます。
-3. 「Search selected text...」を選択します。
+3. 「Select Jump」を選択します。
 4. 選択したテキストに関連する検索オプション(設定されている `contextSearchTools.searchRules` に基づく)が表示されたクイックピックメニューが表示されます。
 5. 検索オプションを選択すると、デフォルトのブラウザで結果が開きます。
 
@@ -94,7 +94,7 @@ VS Code の設定で検索ルールをカスタマイズできます。
         "label": "Wikipedia article",
         "pattern": "^(?!\\d+$).*",
         "url": "https://en.wikipedia.org/wiki/${text}"
-    },
+    }
 ]
 ```
 

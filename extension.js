@@ -15,13 +15,13 @@ function activate(context) {
   };
 
   /**
-   * メインコマンド： Search selected text...
+   * メインコマンド： Select Jump
    */
   context.subscriptions.push(
     vscode.commands.registerCommand("ext.showSearchMenu", async () => {
 
-      const query = getSelectedText();
-      if (!query) return;
+      const text = getSelectedText();
+      if (!text) return;
 
       const config = vscode.workspace.getConfiguration("contextSearchTools");
 
@@ -36,11 +36,11 @@ function activate(context) {
         try {
           const regex = new RegExp(entry.pattern);
 
-          if (regex.test(query)) {
+          if (regex.test(text)) {
             items.push({
               label: entry.label,
               run: () => {
-                const encoded = encodeURIComponent(query);
+                const encoded = encodeURIComponent(text);
                 const url = entry.url.replace("${text}", encoded);
                 openUrl(url);
               }
