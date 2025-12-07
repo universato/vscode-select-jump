@@ -39,6 +39,14 @@ Visual Studioで使われており、VSCodeでも使われるようになった�
 3. update をクリック。
 4. .vsixファイルをアップロードする。
 
+# .vscode/launch.json
+
+launch.json は、拡張開発そのものの設定ファイルである。
+
+個人情報が含まれるものでもなく、commitしてレポジトリにpushすべき。
+
+他の開発者(または未来の自分)が F5 で即デバッグできるようになる
+
 # package.json
 
 ```json
