@@ -52,6 +52,11 @@ function activate(context) {
         }
       });
 
+      if (items.length === 0) {
+        vscode.window.showInformationMessage(`No matching Select Jump rule for: ${text}`);
+        return;
+      }
+
       // QuickPick 表示
       const pick = await vscode.window.showQuickPick(
         items.map(i => i.label),
