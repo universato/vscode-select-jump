@@ -26,7 +26,7 @@ You can customize the search rules in your VS Code settings:
 `"contextSearchTools.searchRules"`: An array of objects, each defining a search rule.
 * `label`: (string) The name displayed in the Quick Pick menu.
 * `pattern`: (string) A regular expression pattern. The search option will only appear if the selected text matches this pattern.
-* `url`: (string) The URL to open. Use `${query}` as a placeholder for the selected text, which will be URL-encoded.
+* `url`: (string) The URL to open. Use `${text}` as a placeholder for the selected text, which will be URL-encoded.
 
 Example default configuration:
 ```json
@@ -34,17 +34,17 @@ Example default configuration:
     {
         "label": "Google search",
         "pattern": "^(?!\\d+$).*",
-        "url": "https://www.google.com/search?q=${query}"
+        "url": "https://www.google.com/search?q=${text}"
     },
     {
         "label": "Google image search",
         "pattern": "^(?!\\d+$).*",
-        "url": "https://www.google.com/search?q=${query}&udm=2"
+        "url": "https://www.google.com/search?q=${text}&udm=2"
     },
     {
         "label": "Wikipedia article",
         "pattern": "^(?!\\d+$).*",
-        "url": "https://en.wikipedia.org/wiki/${query}"
+        "url": "https://en.wikipedia.org/wiki/${text}"
     },
 ]
 ```
@@ -75,7 +75,7 @@ VS Code の設定で検索ルールをカスタマイズできます。
 `"contextSearchTools.searchRules"`: 各検索ルールを定義するオブジェクトの配列。
 * `label`: (string) クイックピックメニューに表示される名前。
 * `pattern`: (string) 正規表現パターン。選択したテキストがこのパターンに一致する場合にのみ、検索オプションが表示されます。
-* `url`: (string) 開く URL。選択したテキストは URL エンコードされて `${query}` のプレースホルダーに置換されます。
+* `url`: (string) 開く URL。選択したテキストは URL エンコードされて `${text}` のプレースホルダーに置換されます。
 
 デフォルト設定の例:
 ```json
@@ -83,17 +83,17 @@ VS Code の設定で検索ルールをカスタマイズできます。
     {
         "label": "Google search",
         "pattern": "^(?!\\d+$).*",
-        "url": "https://www.google.com/search?q=${query}"
+        "url": "https://www.google.com/search?q=${text}"
     },
     {
         "label": "Google image search",
         "pattern": "^(?!\\d+$).*",
-        "url": "https://www.google.com/search?q=${query}&udm=2"
+        "url": "https://www.google.com/search?q=${text}&udm=2"
     },
     {
         "label": "Wikipedia article",
         "pattern": "^(?!\\d+$).*",
-        "url": "https://en.wikipedia.org/wiki/${query}"
+        "url": "https://en.wikipedia.org/wiki/${text}"
     },
 ]
 ```

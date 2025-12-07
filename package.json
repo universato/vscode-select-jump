@@ -21,25 +21,25 @@
             {
               "label": "Google search",
               "pattern": "^(?!\\d+$).*",
-              "url": "https://www.google.com/search?q=${query}"
+              "url": "https://www.google.com/search?q=${text}"
             },
             {
               "label": "Google image search",
               "pattern": "^(?!\\d+$).*",
-              "url": "https://www.google.com/search?q=${query}&udm=2"
+              "url": "https://www.google.com/search?q=${text}&udm=2"
             },
             {
               "label": "Wikipedia article",
               "pattern": "^(?!\\d+$).*",
-              "url": "https://en.wikipedia.org/wiki/${query}"
+              "url": "https://en.wikipedia.org/wiki/${text}"
             },
             {
               "label": "YouTube search",
               "pattern": "^(?!\\d+$).*",
-              "url": "https://www.youtube.com/results?search_query=${query}"
+              "url": "https://www.youtube.com/results?search_query=${text}"
             }
           ],
-          "description": "選択テキストに対して正規表現パターンで表示/非表示を制御する検索メニュー一覧(${query} が選択文字列に置換されます)",
+          "description": "選択テキストに対して正規表現パターンで表示/非表示を制御する検索メニュー一覧(${text} が選択文字列に置換されます)",
           "items": {
             "type": "object",
             "properties": {

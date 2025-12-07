@@ -41,7 +41,7 @@ function activate(context) {
               label: entry.label,
               run: () => {
                 const encoded = encodeURIComponent(query);
-                const url = entry.url.replace("${query}", encoded);
+                const url = entry.url.replace("${text}", encoded);
                 openUrl(url);
               }
             });
@@ -55,7 +55,7 @@ function activate(context) {
       // QuickPick 表示
       const pick = await vscode.window.showQuickPick(
         items.map(i => i.label),
-        { placeHolder: `select! (${query})` }
+        { placeHolder: `select! (${text})` }
       );
 
       // 選択された項目の実行
