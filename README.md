@@ -97,3 +97,39 @@ VS Code の設定で検索ルールをカスタマイズできます。
     }
 ]
 ```
+
+### 発展: キーボードショートカット
+
+```
+> Preferences: Open Keyboard Shortcuts (JSON)
+```
+
+keybingindg.json
+```json
+  {
+    "key": "cmd+s cmd+j",
+    "command": "ext.showSelectJumpMenu",
+    "when": "editorTextFocus && editorHasSelection && !inDebugRepl"
+  },
+  {
+    "key": "ctrl+s ctrl+j",
+    "command": "ext.showSelectJumpMenu",
+    "when": "editorTextFocus && editorHasSelection && !inDebugRepl"
+  },
+  {
+    "key": "cmd+s cmd+s",
+    "command": "workbench.action.files.save",
+    "when": "editorTextFocus && editorHasSelection && !inDebugRepl"
+  },
+  {
+    "key": "ctrl+s ctrl+s",
+    "command": "workbench.action.files.save",
+    "when": "editorTextFocus && editorHasSelection && !inDebugRepl"
+  },
+```
+
+単に「ctrl+s ctrl+j」とすると、保存のctrl+sが効かなくなるので、
+選択しているときだけSelect Jumpできるようにする。
+そうすると、選択していないときは、通常通りctrl+sで保存できる。
+
+選択しているときでも「ctrl+s」を2連続で保存するようにすると良いかも。
