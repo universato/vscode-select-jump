@@ -2,7 +2,8 @@
   "name": "select-jump",
   "displayName": "Select Jump",
   "description": "Adds a context menu for running custom searches and actions on selected text.",
-  "version": "0.0.2",
+  "version": "0.0.3",
+  "icon": "select-jump-icon.png",
   "publisher": "universato",
   "repository": {
     "type": "git",
