@@ -2,55 +2,85 @@ const vscode = require('vscode');
 
 function activate(context) {
 
-  const openUrl = (url) => {
+  /** Open external URL */
+  const openUrl = url => {
     vscode.env.openExternal(vscode.Uri.parse(url));
   };
 
+  /** get selected text */
   const getSelectedText = () => {
     const editor = vscode.window.activeTextEditor;
-    if (!editor) return '';
-    const sel = editor.selection;
-    return editor.document.getText(sel).trim();
+    if (!editor) return "";
+    return editor.document.getText(editor.selection).trim();
   };
 
-  // Google検索
-  const searchGoogle = vscode.commands.registerCommand('ext.searchGoogle', () => {
-    const text = getSelectedText();
-    if (!text) return;
+  /**
+   * メインコマンド： Search selected text..."
+   */
+  context.subscriptions.push(
+    vscode.commands.registerCommand("ext.showSearchMenu", async () => {
 
-    const url = `https://www.google.com/search?q=${encodeURIComponent(text)}`;
-    openUrl(url);
-  });
+      const query = getSelectedText();
+      if (!query) return;
 
-  // Google画像検索
-  const searchImages = vscode.commands.registerCommand('ext.searchImages', () => {
-    const text = getSelectedText();
-    if (!text) return;
+      const config = vscode.workspace.getConfiguration("contextSearchTools");
 
-    const url = `https://www.google.com/search?q=${encodeURIComponent(text)}&udm=2`;
-    openUrl(url);
-  });
+      /** 常に表示される検索メニュー */
+      const customSearches = config.get("customSearches") || [];
 
-  // GitHub Issue検索(選択が数字だけのとき)
-  const searchGithubIssue = vscode.commands.registerCommand('ext.searchGithubIssue', () => {
-    const text = getSelectedText();
-    if (!text) return;
+      /** 正規表現マッチした時だけ表示される検索メニュー */
+      const patternSearches = config.get("patternSearches") || [];
 
-    if (!/^\d+$/.test(text)) {
-      vscode.window.showWarningMessage("数字のみが選択されたときにIssue検索します。");
-      return;
-    }
+      /** QuickPick に表示する項目配列 */
+      const items = [];
 
-    // ★必要に応じてリポジトリを設定
-    const repo = "owner/repository";
+      // ----------------------------------------------------------
+      // 1. patternSearches: 正規表現に一致するものだけ追加
+      // ----------------------------------------------------------
+      patternSearches.forEach(entry => {
+        try {
+          const regex = new RegExp(entry.pattern);
 
-    const url = `https://github.com/${repo}/issues/${text}`;
-    openUrl(url);
-  });
+          if (regex.test(query)) {
+            items.push({
+              label: entry.label,
+              run: () => {
+                const url = entry.url.replace("${query}", encodeURIComponent(query));
+                openUrl(url);
+              }
+            });
+          }
+        } catch (error) {
+          // 正規表現エラーは無視 (表示しない)
+        }
+      });
 
-  context.subscriptions.push(searchGoogle, searchImages, searchGithubIssue);
+      // ----------------------------------------------------------
+      // 2. customSearches: 常に追加
+      // ----------------------------------------------------------
+      customSearches.forEach(entry => {
+        items.push({
+          label: entry.label,
+          run: () => {
+            const url = entry.url.replace("${query}", encodeURIComponent(query));
+            openUrl(url);
+          }
+        });
+      });
+
+      // ----------------------------------------------------------
+      // QuickPick 表示
+      // ----------------------------------------------------------
+      const pick = await vscode.window.showQuickPick(
+        items.map(i => i.label),
+        { placeHolder: "検索メニューを選択してください" }
+      );
+
+      // 選択されたものを実行
+      const chosen = items.find(i => i.label === pick);
+      chosen?.run();
+    })
+  );
 }
 
-function deactivate() {}
-
-module.exports = { activate, deactivate };
+module.exports = { activate };
