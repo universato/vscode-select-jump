@@ -1,4 +1,5 @@
 const vscode = require('vscode');
+const path = require("path");
 
 function activate(context) {
 
@@ -13,6 +14,72 @@ function activate(context) {
     if (!editor) return "";
     return editor.document.getText(editor.selection).trim();
   };
+
+  async function runSelectJump(text) {
+    const config = vscode.workspace.getConfiguration("selectJump");
+    const searchRules = config.get("searchRules") || [];
+    const items = [];
+
+    searchRules.forEach(entry => {
+      try {
+        const regex = new RegExp(entry.pattern);
+        const match = text.match(regex);
+
+        if (match) {
+          items.push({
+            label: entry.label,
+            run: () => {
+              let url = entry.url;
+
+              url = url.replace("${text}", encodeURIComponent(text));
+
+              match.forEach((value, index) => {
+                const encoded = encodeURIComponent(value);
+                url = url.replaceAll(`\${${index}}`, encoded);
+              });
+
+              vscode.env.openExternal(vscode.Uri.parse(url));
+            }
+          });
+        }
+      } catch (e) {}
+    });
+
+    if (items.length === 0) {
+      vscode.window.showInformationMessage(`No matching rule for: ${text}`);
+      return;
+    }
+
+    const pick = await vscode.window.showQuickPick(
+      items.map(i => i.label),
+      { placeHolder: `select! (${text})` }
+    );
+    const chosen = items.find(i => i.label === pick);
+    chosen?.run();
+  }
+
+  context.subscriptions.push(
+    vscode.commands.registerCommand("ext.showSelectJumpFromClipboard", async () => {
+
+      const text = (await vscode.env.clipboard.readText()).trim();
+      if (!text) {
+        vscode.window.showInformationMessage("Clipboard is empty.");
+        return;
+      }
+
+      await runSelectJump(text); // 下で定義する共通関数
+    })
+  );
+
+  context.subscriptions.push(
+    vscode.commands.registerCommand("ext.showSelectJumpFromPath", async (uri) => {
+      if (!uri) return;
+
+      // const text = uri.fsPath.split('/').pop(); // ファイル名だけに絞る
+      const text = path.basename(uri.fsPath);
+      await runSelectJump(text);
+    })
+  );
 
   /**
    * メインコマンド： Select Jump
