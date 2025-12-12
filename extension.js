@@ -67,7 +67,7 @@ function activate(context) {
         return;
       }
 
-      await runSelectJump(text); // 下で定義する共通関数
+      await runSelectJump(text);
     })
   );
 
@@ -75,8 +75,7 @@ function activate(context) {
     vscode.commands.registerCommand("ext.showSelectJumpFromPath", async (uri) => {
       if (!uri) return;
 
-      // const text = uri.fsPath.split('/').pop(); // ファイル名だけに絞る
-      const text = path.basename(uri.fsPath);
+      const text = path.parse(uri.fsPath).name;
       await runSelectJump(text);
     })
   );
