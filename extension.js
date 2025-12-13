@@ -112,7 +112,7 @@ function activate(context) {
 
                 // ${k} -> macth[k]
                 match.forEach((value, index) => {
-                  const encoded = encodeURIComponent(value);
+                  const encoded = encodeURIComponent(value ?? "");
                   url = url.replaceAll(`\${${index}}`, encoded);
                 });
 
