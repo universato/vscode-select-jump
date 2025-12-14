@@ -2,7 +2,7 @@
   "name": "select-jump",
   "displayName": "Select Jump",
   "description": "Adds a context menu for running custom searches and actions on selected text.",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "icon": "select-jump-icon.png",
   "publisher": "universato",
   "repository": {
@@ -14,7 +14,8 @@
   "activationEvents": [
     "onCommand:ext.showSelectJumpMenu",
     "onCommand:ext.showSelectJumpFromPath",
-    "onCommand:ext.showSelectJumpFromClipboard"
+    "onCommand:ext.showSelectJumpFromClipboard",
+    "onLanguage:sql"
   ],
 
   "contributes": {

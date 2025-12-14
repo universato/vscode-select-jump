@@ -1,7 +1,14 @@
 const vscode = require('vscode');
 const path = require("path");
 
+console.log("★ select-jump ★");
+
+const extension2 = require('./extension2-atat-jump');
+
 function activate(context) {
+  console.log("★ select-jump (JS) will activate ★");
+
+  extension2.activate(context);
 
   // Open external URL
   const openUrl = url => {
@@ -142,6 +149,8 @@ function activate(context) {
       chosen?.run();
     })
   );
+
+  console.log("★ select-jump (JS) activated ★");
 }
 
 module.exports = { activate };
