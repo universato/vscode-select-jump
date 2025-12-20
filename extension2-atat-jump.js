@@ -61,7 +61,7 @@ function activate(context) {
             provideDocumentLinks(document) {
                 const text = document.getText();
                 // @ と @@ の両方に対応する正規表現
-                const regexp = /(@|@@)([A-Za-z0-9_\-./]+)/g;
+                const regexp = /(@|@@)([A-Za-z0-9_\-./\\]+)/g;
                 const links = [];
 
                 let match;
